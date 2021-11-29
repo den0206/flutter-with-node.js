@@ -1,0 +1,40 @@
+name: client_side
+description: A new Flutter project.
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.12.0 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.2
+  get: ^4.3.8
+  lottie: ^1.2.1
+  http: ^0.13.4
+  shared_preferences: ^2.0.9
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  # flutter_lints: ^1.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/json/
+  fonts:
+    - family: NimbusSans
+      fonts:
+        - asset: assets/fonts/NimbusSans/NimbusSanL-Reg.otf
+
+    - family: Roboto
+      fonts:
+        - asset: assets/fonts/Roboto/Roboto-Medium.ttf
