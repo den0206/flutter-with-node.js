@@ -35,6 +35,7 @@ async function register(req, res, next) {
     const data = await User.create(user);
     /// client
     await Rol.create(data.id, '1');
+    await Rol.create(data.id, '2');
 
     return res.status(201).json({
       status: true,

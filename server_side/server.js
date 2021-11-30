@@ -6,6 +6,9 @@ const logger = require('morgan');
 const cors = require('cors');
 const port = process.env.PORT || 3000;
 const usersRoute = require('./routes/user_route');
+const categoryRoute = require('./routes/category_route');
+const productRoute = require('./routes/product_route');
+
 const passport = require('passport');
 
 app.use(logger('dev'));
@@ -21,6 +24,8 @@ app.disable('x-powered-by');
 app.set('port', port);
 
 usersRoute(app);
+categoryRoute(app);
+productRoute(app);
 
 server.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);

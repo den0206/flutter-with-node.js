@@ -41,3 +41,11 @@ String? validPhone(String? value) {
     return null;
   }
 }
+
+String? validIsEmpty(String? value) {
+  if (value == null || value.isEmpty) {
+    return "Not Empty";
+  } else {
+    return null;
+  }
+}
