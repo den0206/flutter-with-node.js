@@ -9,6 +9,8 @@ import 'package:client_side/src/screen/main/client/edit/client_edit_screen.dart'
 import 'package:client_side/src/screen/main/driver/products/driver_products_screen.dart';
 import 'package:client_side/src/screen/main/restaurant/categoey/category_create_controller.dart';
 import 'package:client_side/src/screen/main/restaurant/categoey/category_create_screen.dart';
+import 'package:client_side/src/screen/main/restaurant/categoey/product/product_create_controller.dart';
+import 'package:client_side/src/screen/main/restaurant/categoey/product/product_create_screen.dart';
 import 'package:client_side/src/screen/main/restaurant/ordres/restaurant_order_controller.dart';
 import 'package:client_side/src/screen/main/restaurant/ordres/restaurant_orders_screen.dart';
 import 'package:client_side/src/screen/main/roles/roles_controller.dart';
@@ -80,6 +82,11 @@ class MyApp extends StatelessWidget {
           name: CategoryCreateScreen.routeName,
           page: () => CategoryCreateScreen(),
           binding: CategoryCrrateBinding(),
+        ),
+        GetPage(
+          name: ProductCreateScreen.routeName,
+          page: () => ProductCreateScreen(),
+          binding: ProductCreateBinding(),
         )
       ],
       initialBinding: InitialBindings(),

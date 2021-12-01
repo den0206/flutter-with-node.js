@@ -2,13 +2,16 @@ import 'dart:io';
 
 import 'package:client_side/src/model/category.dart';
 import 'package:client_side/src/screen/auth/login/login_screen.dart';
+import 'package:client_side/src/screen/main/restaurant/categoey/product/product_create_controller.dart';
 import 'package:client_side/src/screen/widget/custom_textfield.dart';
 import 'package:client_side/src/utils/my_colors.dart';
 import 'package:client_side/src/utils/validations.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
 
-class ProductCreateScreen extends StatelessWidget {
+class ProductCreateScreen extends GetView<ProductCreateController> {
   ProductCreateScreen({Key? key}) : super(key: key);
+  static const routeName = '/ProductCreate';
   final _formKey = GlobalKey<FormState>(debugLabel: '_crateProduct');
 
   @override
@@ -26,19 +29,20 @@ class ProductCreateScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 CustomTextField(
-                  controller: TextEditingController(),
+                  controller: controller.nameController,
                   hintText: "Product Name",
                   validator: validIsEmpty,
                   icons: Icons.list_alt,
                 ),
                 CustomDescriptionField(
-                  controller: TextEditingController(),
+                  controller: controller.descriptionController,
                   hintText: "Create Description",
                 ),
                 CustomTextField(
-                  controller: TextEditingController(),
+                  controller: controller.priceController,
                   hintText: "Price",
                   inputType: TextInputType.phone,
+                  validator: validIsEmpty,
                   icons: Icons.monetization_on,
                 ),
                 Container(
@@ -53,11 +57,13 @@ class ProductCreateScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                _dropdownCategories([]),
+                _dropdownCategories(),
                 AuthButton(
                   title: "Create Category",
                   onPress: () {
-                    if (_formKey.currentState!.validate()) {}
+                    if (_formKey.currentState!.validate()) {
+                      controller.createProduct();
+                    }
                   },
                 ),
               ],
@@ -94,51 +100,59 @@ class ProductCreateScreen extends StatelessWidget {
           );
   }
 
-  Widget _dropdownCategories(List<Category> categories) {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 35),
-      child: Material(
-        elevation: 2.0,
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(5),
-        child: Container(
-          padding: EdgeInsets.all(10),
-          child: Column(
-            children: [
-              Row(
+  Widget _dropdownCategories() {
+    return GetBuilder<ProductCreateController>(
+      builder: (_) {
+        return Container(
+          margin: EdgeInsets.symmetric(horizontal: 35),
+          child: Material(
+            elevation: 2.0,
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(5),
+            child: Container(
+              padding: EdgeInsets.all(10),
+              child: Column(
                 children: [
-                  Icon(Icons.search, color: Colors.white),
-                  SizedBox(
-                    width: 15,
+                  Row(
+                    children: [
+                      Icon(Icons.search, color: Colors.white),
+                      SizedBox(
+                        width: 15,
+                      ),
+                      Text("Categories",
+                          style: TextStyle(
+                            color: Colors.grey,
+                            fontSize: 16,
+                          ))
+                    ],
                   ),
-                  Text("Categories",
-                      style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 16,
-                      ))
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    child: DropdownButton(
+                      elevation: 3,
+                      underline: Container(
+                        alignment: Alignment.centerRight,
+                        child: Icon(Icons.arrow_drop_down_circle,
+                            color: MyColors.primary),
+                      ),
+                      isExpanded: true,
+                      hint: Text(
+                        "Select Category",
+                        style: TextStyle(color: Colors.grey, fontSize: 16),
+                      ),
+                      value: controller.selectCategory,
+                      items: controller.categoryItems,
+                      onChanged: (Category? value) {
+                        controller.onChange(value);
+                      },
+                    ),
+                  )
                 ],
               ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                child: DropdownButton(
-                  elevation: 3,
-                  underline: Container(
-                    alignment: Alignment.centerRight,
-                    child: Icon(Icons.arrow_drop_down_circle,
-                        color: MyColors.primary),
-                  ),
-                  isExpanded: true,
-                  hint: Text(
-                    "Select Category",
-                    style: TextStyle(color: Colors.grey, fontSize: 16),
-                  ),
-                  items: [],
-                ),
-              )
-            ],
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }

@@ -1,5 +1,5 @@
-import 'package:client_side/src/screen/main/client/edit/client_edit_screen.dart';
 import 'package:client_side/src/screen/main/restaurant/categoey/category_create_screen.dart';
+import 'package:client_side/src/screen/main/restaurant/categoey/product/product_create_screen.dart';
 import 'package:client_side/src/screen/main/restaurant/ordres/restaurant_order_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -56,17 +56,6 @@ class RestaurantOrdersScreen extends GetView<RestaurantOrdersController> {
               ),
             ),
             ListTile(
-              title: Text("Edit User"),
-              trailing: Icon(Icons.edit_outlined),
-              onTap: () {
-                Get.toNamed(ClientEditScreen.routeName);
-              },
-            ),
-            ListTile(
-              title: Text("My Products"),
-              trailing: Icon(Icons.production_quantity_limits),
-            ),
-            ListTile(
               title: Text("Select Role"),
               trailing: Icon(Icons.person),
               onTap: () {
@@ -78,6 +67,13 @@ class RestaurantOrdersScreen extends GetView<RestaurantOrdersController> {
               trailing: Icon(Icons.list_alt),
               onTap: () {
                 Get.toNamed(CategoryCreateScreen.routeName);
+              },
+            ),
+            ListTile(
+              title: Text("Create Product"),
+              trailing: Icon(Icons.food_bank),
+              onTap: () {
+                Get.toNamed(ProductCreateScreen.routeName);
               },
             ),
             ListTile(
