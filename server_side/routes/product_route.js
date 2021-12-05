@@ -7,4 +7,10 @@ module.exports = (app) => {
     passport.authenticate('jwt', {session: false}),
     ProductController.create
   );
+
+  app.get(
+    '/api/product/findByCategoryId/:category_id',
+    passport.authenticate('jwt', {session: false}),
+    ProductController.findByCategoryId
+  );
 };

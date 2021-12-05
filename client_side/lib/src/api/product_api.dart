@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:client_side/src/model/product.dart';
 import 'package:http/http.dart' as http;
 import 'package:client_side/src/api/enviroment.dart';
 import 'package:client_side/src/model/response.dart';
@@ -37,6 +38,35 @@ class ProductAPI {
     } catch (e) {
       print(e);
       return null;
+    }
+  }
+
+  Future<List<Product>> getByCategoryId(String category_id) async {
+    try {
+      if (token == null) {
+        throw "No Token";
+      }
+      final List<Product> arr = [];
+
+      Uri uri = Uri.http(_url, "$_endPoint/findByCategoryId/$category_id");
+      Map<String, String> headers = {
+        "Content-type": "application/json",
+        "Authorization": token!,
+      };
+
+      final res = await http.get(uri, headers: headers);
+
+      final dates = json.decode(res.body) as List;
+
+      dates.forEach((data) {
+        final cat = Product.fromJson(data);
+        arr.add(cat);
+      });
+
+      return arr;
+    } catch (e) {
+      print(e);
+      return [];
     }
   }
 }

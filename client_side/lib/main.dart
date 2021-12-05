@@ -4,6 +4,7 @@ import 'package:client_side/src/screen/auth/regstration/registration_controller.
 import 'package:client_side/src/screen/auth/regstration/registration_screen.dart';
 import 'package:client_side/src/screen/main/client/client_products/client_products_cotroller.dart';
 import 'package:client_side/src/screen/main/client/client_products/client_products_screen.dart';
+import 'package:client_side/src/screen/main/client/create_orders_screen/create_orders_screen.dart';
 import 'package:client_side/src/screen/main/client/edit/client_edit_controller.dart';
 import 'package:client_side/src/screen/main/client/edit/client_edit_screen.dart';
 import 'package:client_side/src/screen/main/driver/products/driver_products_screen.dart';
@@ -38,7 +39,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           fontFamily: "NimbusSans",
           primaryColor: MyColors.primary,
-          appBarTheme: AppBarTheme(backgroundColor: Colors.red)),
+          appBarTheme: AppBarTheme(
+            backgroundColor: Colors.red,
+            elevation: 0,
+          )),
       getPages: [
         GetPage(
           name: Root.routeName,
@@ -62,7 +66,7 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: ClientProductsScreen.routeName,
           page: () => ClientProductsScreen(),
-          binding: ClientProductsBindings(),
+          // binding: ClientProductsBindings(),
         ),
         GetPage(
           name: RestaurantOrdersScreen.routeName,
@@ -87,6 +91,10 @@ class MyApp extends StatelessWidget {
           name: ProductCreateScreen.routeName,
           page: () => ProductCreateScreen(),
           binding: ProductCreateBinding(),
+        ),
+        GetPage(
+          name: CreateOrdersScreen.routeName,
+          page: () => CreateOrdersScreen(),
         )
       ],
       initialBinding: InitialBindings(),

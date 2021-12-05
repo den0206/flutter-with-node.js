@@ -23,15 +23,17 @@ class Product {
   final String description;
   final double price;
   final int categoryId;
-  final int quantity;
+  int quantity;
 
   factory Product.fromJson(Map<String, dynamic> json) => Product(
-        id: json["id"],
+        id: json["id"] is int ? json["id"].toString() : json["id"],
         name: json["name"],
         description: json["description"],
-        price: json["price"].toDouble(),
-        categoryId: json["category_id"],
-        quantity: json["quantity"],
+        price: double.parse(json["price"]),
+        categoryId: json["category_id"] is String
+            ? int.parse(json["category_id"])
+            : json["category_id"],
+        quantity: 1,
       );
 
   Map<String, dynamic> toJson() => {

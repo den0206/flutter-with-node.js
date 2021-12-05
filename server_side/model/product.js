@@ -65,4 +65,21 @@ Product.update = (product) => {
   ]);
 };
 
+Product.findbyCategoryId = (category_id) => {
+  const sql = `
+  SELECT
+    P.*
+  FROM
+    products AS P
+  INNER JOIN 
+    categories AS C
+  ON 
+   p.category_id = c.id
+  WHERE
+    C.id = $1
+  `;
+
+  return db.manyOrNone(sql, category_id);
+};
+
 module.exports = Product;

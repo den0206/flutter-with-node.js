@@ -20,6 +20,21 @@ async function create(req, res, next) {
   }
 }
 
+async function findByCategoryId(req, res, next) {
+  try {
+    const id = req.params.category_id;
+    console.log('Category id', id);
+    const data = await Product.findbyCategoryId(id);
+    return res.status(201).json(data);
+  } catch (e) {
+    console.log(e);
+    throw res
+      .status(501)
+      .json({status: false, message: 'Fatal Error', error: e});
+  }
+}
+
 module.exports = {
   create,
+  findByCategoryId,
 };
